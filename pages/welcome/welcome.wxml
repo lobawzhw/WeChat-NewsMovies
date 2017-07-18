@@ -1,0 +1,8 @@
+<!--pages/welcome/welcome.wxml-->
+<view class="container">
+    <image class="image" src="/images/icon.jpg"></image>
+    <text class="user-name"><text style="color:red">Hello</text>, Loba!</text>
+    <view class="moto">
+        <text class="moto-button" bindtap="onTap">开启小程序之旅</text>
+    </view>
+</view>

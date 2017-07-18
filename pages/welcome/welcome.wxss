@@ -1,0 +1,39 @@
+/* pages/welcome/welcome.wxss */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+     
+}
+
+.image {
+    margin-top: 160rpx;
+    width: 200rpx;
+    height: 200rpx;
+}
+
+.user-name {
+    margin-top: 100rpx;
+    font-size: 32rpx;    
+    font-weight: bold;
+}
+
+.moto {
+    margin-top: 200rpx;
+    border: 1px solid #405f80;
+    width: 200rpx;
+    height: 80rpx;
+    border-radius: 5px;
+    color: #405f80;
+    text-align: center;
+}
+
+.moto-button {
+    font-size: 22rpx;
+    font-weight: bold;
+    line-height: 80rpx;
+}
+
+page {
+    background-color: #b3d4db;
+}
