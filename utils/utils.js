@@ -40,9 +40,17 @@ function isEmptyObject(e) {
   return true;
 }
 
+/**
+ * 删除左右两端的空格
+ */
+function trim(str) { 
+  return str.replace(/(^\s*)|(\s*$)/g, "");
+}
+
 module.exports = {
   convertToStarsArray: convertToStarsArray,
   http: http,
   cutTitle: cutTitle,
   isEmptyObject: isEmptyObject,
+  trim: trim,
 }

@@ -47,9 +47,17 @@ Page({
       });
       app.globalData.g_isPlayingMusic = true;
       app.globalData.g_currentMusicPostId = that.data.id;
-    })
+    });
 
     wx.onBackgroundAudioPause(function () {
+      that.setData({
+        isPlayingMusic: false
+      });
+      app.globalData.g_isPlayingMusic = false;
+      app.globalData.g_currentMusicPostId = null;
+    });
+
+    wx.onBackgroundAudioStop(function () {
       that.setData({
         isPlayingMusic: false
       });

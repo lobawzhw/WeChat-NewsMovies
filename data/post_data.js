@@ -6,11 +6,11 @@ var data = [
     image_condition: true,
     view_num: '123',
     collect_num: '12',
-    post_image: "/images/post/pt2.png",
+    post_image: "/images/post/pt2.jpg",
     author_image: '/images/avatar/tx1.jpg',
     postId: 0,
     author: '张三',
-    headImage: '/images/post/pt2.png',
+    headImage: '/images/post/pt2.jpg',
     detail:'这里是文章内容，这里是文章内容，这里是文章内容，这里是文章内容，这里是文章内容，这里是文章内容，这里是文章内容，这里是文章内容',
     music: {
       url: "http://ws.stream.qqmusic.qq.com/C100003507bR0gDKBm.m4a?fromtag=38",

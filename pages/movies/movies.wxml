@@ -3,7 +3,7 @@
 <view class="search-container">
   <icon type="search" class="search-img" size="13" color="#405f80" />
   <input type="text" placeholder="血战钢锯岭、你的名字" placeholder-class="placeholder" bindfocus="onBindFocus" bindblur="onBindBlur" />
-  <image wx:if="{{searchPanelShow}}" src="/images/icon/xx.png" class="xx-img" bindtap="onCancelImgTap"></image>
+  <image wx:if="{{isShowSearchList}}" src="/images/icon/xx.png" class="xx-img" bindtap="onCancelImgTap"></image>
 </view>
 
 <view class="container" wx:if="{{isShowMainList}}">

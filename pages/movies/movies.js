@@ -13,10 +13,9 @@ Page({
     searchResult: {},
     isShowMainList: true,
     isShowSearchList: false,
-    searchPanelShow: false,
     startNum: 0,
     searchContent: '',
-    movies: {}
+    isEmpty: true,
   },
 
   /**
@@ -46,9 +45,6 @@ Page({
     });
     if (fromSearch) {
       this.data.startNum += 20;
-      // this.setData({
-      //   startNum: startNum+20
-      // });
     }
   },
 
@@ -65,16 +61,21 @@ Page({
       };
       movies.push(temp);
     }
-    var realData = {};
+
     var totalMovies = {};
-    if (!utils.isEmptyObject(this.data.searchResult)) {
-      totalMovies = movies;
-    } else{
-      totalMovies = this.data.movies.contat(movies);      
+    totalMovies = movies;
+    if (typeKey == 'searchResult') {
+      if (!this.data.isEmpty) {
+        totalMovies = this.data.searchResult.movies.concat(movies);
+      }
+      else {
+        this.data.isEmpty = false;
+      }
     }
 
+    var realData = {};
     realData[typeKey] = {
-      movies: movies,
+      movies: totalMovies,
       typeTitle: typeTitle
     };
     this.setData(realData);
@@ -89,31 +90,38 @@ Page({
     })
   },
 
+  onMovieTap: function (event) {
+    var id = event.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: 'movie-detail/movie-detail?id=' + id,
+    })
+  },
+
   onBindFocus: function (event) {
     this.setData({
       isShowMainList : false,
       isShowSearchList: true,
-      searchPanelShow: true,
     });
   },
 
   onBindBlur: function (event) {
-    var searchContent = event.detail.value;
-    var url = '/v2/movie/search?q=' + searchContent;
-    this.getSingleRequestData(url, 'searchResult', searchContent, true);
-    this.setData({
-      searchContent: searchContent
-    });
-    wx.showLoading({
-      title: '正在搜索中...',
-    });
+    var searchContent = utils.trim(event.detail.value); 
+    if (searchContent!='') {
+      var url = '/v2/movie/search?q=' + searchContent;
+      this.getSingleRequestData(url, 'searchResult', searchContent, true);
+      this.setData({
+        searchContent: searchContent
+      });
+      wx.showLoading({
+        title: '正在搜索中...',
+      });
+    }    
   },
 
   onCancelImgTap:function(event) {
     this.setData({
       isShowMainList: true,
       isShowSearchList: false,
-      searchPanelShow: false,
     });
   },
 
@@ -158,12 +166,10 @@ Page({
   onReachBottom: function (event) {
     if (!utils.isEmptyObject(this.data.searchResult)) {
       var searchContent = this.data.searchContent;
-      var startNum = this.data.startNum;
-      var url = '/v2/movie/search?q=' + searchContent + '&start=' + startNum + '&count=20';
+      var url = '/v2/movie/search?q=' + searchContent + '&start=' + this.data.startNum + '&count=20';
       wx.showNavigationBarLoading();
       this.getSingleRequestData(url, 'searchResult', searchContent, true);
     }
-   
   },
 
   /**
